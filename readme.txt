@@ -1,0 +1,1 @@
+source blog-env/bin/activate
