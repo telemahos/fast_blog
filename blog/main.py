@@ -30,7 +30,7 @@ async def update_blog(id, request: schemas.Blog, db: Session = Depends(get_db)):
 
 @app.post('/blog', status_code=status.HTTP_201_CREATED, tags=['Blog'])
 def create_blog(request: schemas.Blog, db: Session=Depends(get_db)):
-    new_blog = models.Blog(title=request.title, body=request.body)
+    new_blog = models.Blog(title=request.title, body=request.body, author_id=1)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
