@@ -1,10 +1,11 @@
 from fastapi import FastAPI
-from sqlalchemy.sql import text
 from . import models
 from .database import engine
 from .routers import blog, user
 import uvicorn
-# On video 3:01
+# On video 3:12 
+# TODO
+# repository/delete problem
 
 app = FastAPI()
 
