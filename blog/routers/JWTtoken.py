@@ -1,6 +1,8 @@
 from typing import Optional
 from datetime import datetime, timedelta
+from fastapi import Depends
 from jose import JWTError, jwt
+from .. import schemas
 
 
 # https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/?h=jwt#about-jwt
@@ -20,3 +22,13 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
+
+def verify_token(token: str, credentials_exception):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email: str = payload.get("sub")
+        if email is None:
+            raise credentials_exception
+        token_data = schemas.TokenData(email=email)
+    except JWTError:
+        raise credentials_exception
