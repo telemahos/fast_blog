@@ -1,2 +1,2 @@
 source blog-env/bin/activate
-VS Theme: 'NoctisUva', 'Viow Flat'
+VS Theme: 'NoctisUva', 'Viow Flat', "Adapta Nikto"

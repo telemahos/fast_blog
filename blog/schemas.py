@@ -1,5 +1,15 @@
+from typing import Optional
 from pydantic import BaseModel
 from typing import List
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
 
 class BlogBase(BaseModel):
     title: str
@@ -29,3 +39,7 @@ class ShowBlog(BaseModel):
     owner: ShowUser
     class Config():
         orm_mode = True
+
+class login(BaseModel):
+    username: str
+    password: str
