@@ -1,2 +1,3 @@
-source blog-env/bin/activate
-VS Theme: 'NoctisUva', 'Viow Flat', "Adapta Nikto"
+- source blog-env/bin/activate
+- uvicorn blog.main:app --reload
+- VS Theme: 'NoctisUva', 'Viow Flat', "Adapta Nikto"
