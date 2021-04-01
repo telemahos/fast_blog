@@ -1,3 +1,6 @@
 __pycache__
 blog-env
 .DS_Store
+fin_env
+blog.db
+
