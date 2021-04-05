@@ -28,6 +28,7 @@ def destroy_blog(id:int , db: Session = Depends(get_db), current_user: schemas.U
 async def update_blog(id:int , request: schemas.Blog, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     return blog.update(id, request, db)
 
-@router.get('/{id}', status_code=200, response_model=schemas.ShowBlog)
+# @router.get('/{id}', status_code=200, response_model=schemas.ShowBlog)
+@router.get('/{id}', status_code=200, response_model=schemas.Blog)
 def show_Blog(id: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     return blog.show(id, db)

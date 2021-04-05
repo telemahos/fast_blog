@@ -1,6 +1,6 @@
 - python3 -m venv fin_env
-- source blog-env/bin/activate
+- source fin_env/bin/activate
 - pip install --upgrade pip
 - pip install -r requirements.txt
-- uvicorn blog.main:app --reload
+- uvicorn backend.main:app --reload
 - VS Theme: 'NoctisUva', 'Viow Flat', "Adapta Nikto"

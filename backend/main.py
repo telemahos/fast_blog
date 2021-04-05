@@ -21,6 +21,8 @@ app.include_router(authendication.router)
 app.include_router(blog.router)
 app.include_router(user.router)
 
+# app.router.redirect_slashes = False
+
 origins = ["*"]
 # origins = [
 #     "http://localhost.tiangolo.com",
