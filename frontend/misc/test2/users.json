@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "kostas",
+        "email": "kostas@kakoulis.de"
+    },
+    {
+        "id": 2,
+        "name": "noula",
+        "email": "noula@kakoulis.de"
+    },
+    {
+        "id": 3,
+        "name": "niki",
+        "email": "niki@kakoulis.de"
+    }
+]

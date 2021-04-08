@@ -6,7 +6,8 @@ const addPostBtn = document.getElementById('add-post-btn');
 const readCookieBtn = document.getElementById('readCookie-btn');
 const delCookieBtn = document.getElementById('delCookie-btn');
 const updatePostBtn = document.getElementById('update-post-btn');
-const viewPostBtn = document.getElementById('view-post-btn')
+const viewPostBtn = document.getElementById('view-post-btn');
+const delPostBtn = document.getElementById('delete-post-btn');
 
 var cookieValue = "";
 
@@ -28,7 +29,8 @@ const login = () => {
 		{
 			headers: {
 				// 'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Type': 'application/json',
+				// 'Content-Type': 'application/json',
+				'Content-Type': 'multipart/form-data'
 			},
 		},
 		// {withCredentials: true},
@@ -101,52 +103,99 @@ const getBlog = () =>   {
 };
 
 // Update Blog => Post
-const updatePostData = () => {
+const updatePostData = (e) => {
+	console.log("test");
+	e.preventDefault();
+	// console.log(form);
+	// console.log(e);
 	var update_post_id = document.getElementById("update_blog_id").value;
 	var update_post_title = document.getElementById("update_blog_title").value;
 	var update_post_body = document.getElementById("update_blog_body").value;
-	axios.put(
-		'http://127.0.0.1:8000/blog/' + update_post_id, 
-		{
+	fetch('http://127.0.0.1:8000/blog/' + update_post_id, {
+		method: "PUT",
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${token}`
+		},
+		body: JSON.stringify({
 			title: update_post_title,
 			body: update_post_body
-		},
-		{
-			headers: {
-				// 'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
-			},
-		},
-	)
-	.then((response) => console.log(response))	
-	.catch((error) => console.log(error));
+		})
+	})
+	.then(res => {
+		return res.json()
+	})
+	.then(data => console.log(data))
+	.catch(error => console.log(`ERROR: ${error}`));
+	// return false;
+	// e.stopImmediatePropagation();
+	// axios.put(
+	// 	'http://127.0.0.1:8000/blog/' + update_post_id, 
+	// 	{
+	// 		title: update_post_title,
+	// 		body: update_post_body
+	// 	},
+	// 	{
+	// 		headers: {
+	// 			// 'Content-Type': 'application/x-www-form-urlencoded',
+	// 			'Content-Type': 'application/json',
+	// 			'Authorization': `Bearer ${token}`
+	// 		},
+	// 	},
+	// )
+	// .then((response) => console.log(response))	
+	// .catch((error) => console.log(error));
 };
 
-// Get a new Blog Post
-const sendBlogPostData = () => {
-	var post_title = document.getElementById("the_title").value;
-	var post_body = document.getElementById("the_body").value;
+// Create a new Blog Post
+const sendBlogPostData = (e) => {
+	e.preventDefault();
+	let newPost = new FormData();
+	const post_title = document.getElementById("the_title").value;
+	const post_body = document.getElementById("the_body").value;
+	newPost.set('title', post_title);
+	newPost.set('body', post_body);
+	console.warn(newPost); // JSON.stringify(
 	axios.post(
 		'http://127.0.0.1:8000/blog',
-		{
-			// data
-			title: post_title,
-			body: post_body
-		},
+		// {
+		// 	// data
+		// 	title: post_title,
+		// 	body: post_body
+		// },
+		// JSON.stringify(newPost),
+		JSON.stringify(Object.fromEntries(newPost)),
 		{
 			headers: {
 				'Authorization': `Bearer ${token}`,
-				'Content-Type': 'application/json',
-				
+				'Content-Type': 'application/json'
+				// 'Content-Type': 'multipart/form-data'
 			},
 		},
-		{withCredentials: true},
+		// {withCredentials: true},
 	)
 	.then(function (response) {
 		// handle success
 		console.log("New Blog Post: " + response)
 	})
+	.catch((error) => console.log(error.response.data));
+};
+
+// Update Blog => Post
+const deletePostData = (e) => {
+	const delete_post_id = document.getElementById("delete_post_id").value;
+	axios.delete(
+		'http://127.0.0.1:8000/blog/' + delete_post_id, 
+		{
+			headers: {
+				// 'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Type': 'application/json',
+				// 'Content-Type': 'multipart/form-data',
+				'Authorization': `Bearer ${token}`
+			},
+		},
+	)
+	.then((response) => console.log(response))	
 	.catch((error) => console.log(error));
 };
 
@@ -200,3 +249,4 @@ updatePostBtn.addEventListener('click', updatePostData);
 addPostBtn.addEventListener('click', sendBlogPostData);
 getBtn.addEventListener('click', getBlog);
 viewPostBtn.addEventListener('click', viewBloPostData);
+delPostBtn.addEventListener('click', deletePostData);

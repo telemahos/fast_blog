@@ -11,7 +11,7 @@
         <!-- ##################################################### -->
         <!-- LOGIN  -->
         <!-- ##################################################### -->
-        <h2>Login </h2>
+        <h2>Login kostas</h2>
         <!-- <form id="loginForm" name="loginForm"> -->
             <div>
                 <label for="the_username">Username/Email:</label>
@@ -30,7 +30,7 @@
         <hr>
         <h2>Add a Blog Post</h2>
         <input type="text" id='the_title' value="Blog Post Title">
-        <textarea id='the_body' cols="100" rows="5">Blog Post Body</textarea>
+        <textarea id='the_body' cols="100" rows="2">Blog Post Body</textarea>
         <button id="add-post-btn">Add a Post on the Blog</button>
         <button id="get-btn">ALL BLOG POSTS</button>
 
@@ -39,10 +39,13 @@
         <!-- ##################################################### -->
         <hr>
         <h2>Update a Blog Post</h2>
-        <input type="text" id='update_blog_title' placeholder="The Updated Title">
-        <textarea id='update_blog_body' cols="100" rows="5" placeholder="The Updated Blog body"></textarea>
-        <button id="update-post-btn" type="submit">Update Blog Post</button>
-        <input type="number" id='update_blog_id' placeholder="The Post ID">
+        <form id="udpate-form" onSubmit="return false;">
+            <input type="text" id='update_blog_title' placeholder="The Updated Title">
+            <textarea id='update_blog_body' cols="100" rows="2" placeholder="The Updated Blog body"></textarea>
+            <!-- <a href="javascript:;" id="update-post-btn">Update Post</a> -->
+            <button id="update-post-btn" type="submit">Update Blog Post</button> 
+            <input type="number" id='update_blog_id' placeholder="The Post ID">
+        </form>
 
         <!-- ##################################################### -->
         <!-- VIEW A BLOG POST BY ID  -->
@@ -53,6 +56,17 @@
         <button id="view-post-btn" type="submit">View a Blog Post</button>
         <h3><b></b>Title:</b> <span id="view_post_title"></span> </h3>
         <p><b>Body:</b> <span id="view_post_body"></span></p>
+
+
+        <!-- ##################################################### -->
+        <!-- Delete A BLOG POST BY ID  -->
+        <!-- ##################################################### -->
+        <hr>
+        <h2>Delete a Blog Post</h2>
+        <input type="text" id='delete_post_id' placeholder="Delete with Post ID">
+        <button id="delete-post-btn" type="submit">Delete Blog Post</button>
+
+
 
         <!-- ##################################################### -->
         <!-- READ / DELETE COOKIE  -->
